@@ -1,68 +1,57 @@
-<h1>BluePrint3D - Change Order Email for Magento 2 ✉️</h1>
+# BluePrint3D – Change Order Email for Magento 2 ✉️
 
-<p>
-    <a href="#"><img src="https://img.shields.io/badge/Magento-2.4.x-orange.svg" alt="Magento Version" /></a>
-    <a href="#"><img src="https://img.shields.io/badge/PHP-8.1%20|%208.2%20|%208.3-blue.svg" alt="PHP Version" /></a>
-    <a href="#"><img src="https://img.shields.io/badge/License-Proprietary-lightgrey.svg" alt="License" /></a>
-</p>
+![Magento 2.4.x](https://img.shields.io/badge/Magento-2.4.x-orange.svg)
+![PHP 8.1–8.5](https://img.shields.io/badge/PHP-8.1--8.5-blue.svg)
+![Licence](https://img.shields.io/badge/Licence-Free_EULA-lightgrey.svg)
 
-<p>A Magento 2 admin module that lets store staff correct the customer email address on an existing order directly from the order view page — no database access required.</p>
+Lets store staff correct the customer email address on an existing order, straight from the order view page, with no database access needed.
 
-<hr />
+---
 
-<h2>🛑 The Problem</h2>
-<p>Customers regularly place orders with a mistyped email address, and out of the box Magento gives admins no safe way to fix it. The email on an order is tied to the customer record it was placed under, so a naive edit can silently detach the order from its account or collide with an email already used by someone else.</p>
+## 🛑 The Problem
+Customers regularly mistype their email at checkout, and Magento gives admins no safe way to fix it. The order email is tied to the customer record, so a naive edit can detach the order from its account or collide with an address another customer already uses.
 
-<h2>🛠️ The Solution</h2>
-<p>This module adds an <strong>"Edit Order Email"</strong> button to the admin order view page. Submitting a new address updates the order (and the customer account, if the order belongs to one) safely:</p>
-<ul>
-    <li>If the new email is unused, or already belongs to the same customer, the order and customer record are updated immediately.</li>
-    <li>If the new email already belongs to a <em>different</em> customer, the admin is asked to confirm before the order is moved to that customer's account.</li>
-    <li>Guest orders are updated in place with no customer account changes.</li>
-</ul>
-<p>Every change is recorded as a comment in the order's status history, noting the old/new email, the customer_id involved, and which admin user made the change.</p>
+## 🛠️ The Solution
+An **Edit Order Email** button on the admin order view. Submitting a new address updates the order, and the customer account if there is one, safely:
 
-<h2>✨ Features</h2>
-<ul>
-    <li><strong>In-Context Editing:</strong> Edit the order email without leaving the order view page.</li>
-    <li><strong>Guest & Customer Safe:</strong> Correctly handles guest orders, matching accounts, and conflicting accounts differently.</li>
-    <li><strong>Confirmation Step:</strong> Never silently reassigns an order to another customer — always requires explicit confirmation.</li>
-    <li><strong>Full Audit Trail:</strong> Logs every email change to the order's status history, including which admin made it.</li>
-    <li><strong>Sales Grid Aware:</strong> Keeps the sales_order_grid email column in sync with the change.</li>
-</ul>
+- If the new email is unused, or already belongs to the same customer, the order and account are updated straight away.
+- If it belongs to a **different** customer, the admin must confirm before the order is moved to that account.
+- Guest orders are updated in place with no account changes.
 
-<hr />
+Every change is written to the order's status history: old and new email, the customer ID involved, and which admin made it.
 
-<h2>📦 Installation</h2>
+## ✨ Features
+- **In-context editing:** change the email without leaving the order view.
+- **Guest and customer safe:** guest orders, matching accounts and conflicting accounts are each handled correctly.
+- **Confirmation step:** never silently reassigns an order to another customer.
+- **Full audit trail:** every change logged to the order history with the admin's name.
+- **Sales grid aware:** keeps the `sales_order_grid` email column in sync.
 
-<p><strong>1. Install via Composer</strong></p>
-<pre><code>composer require blueprint3d/module-change-order-email</code></pre>
+---
 
-<p><strong>2. Enable the module</strong></p>
-<pre><code>php bin/magento module:enable BluePrint3D_ChangeOrderEmail</code></pre>
+## 📦 Installation
 
-<p><strong>3. Run setup upgrade</strong></p>
-<pre><code>php bin/magento setup:upgrade</code></pre>
+```bash
+composer require blueprint3d/module-change-order-email
+bin/magento module:enable BluePrint3D_ChangeOrderEmail
+bin/magento setup:upgrade
+bin/magento setup:di:compile
+bin/magento cache:flush
+```
 
-<p><strong>4. Compile and flush cache</strong></p>
-<pre><code>php bin/magento setup:di:compile
-php bin/magento cache:flush</code></pre>
+## ⚙️ Configuration
+No settings. Open any order in **Sales > Orders**, click **Edit Order Email**, enter and confirm the new address and submit. If it belongs to another customer you'll be asked to confirm the move first.
 
-<hr />
+---
 
-<h2>👨‍💻 Usage</h2>
-<p>Open any order in <strong>Sales &gt; Orders</strong>, click <strong>Edit Order Email</strong> in the page header, enter and confirm the new email address, and submit. If the new address already belongs to another customer, you'll be prompted to confirm moving the order to that customer before the change is applied.</p>
+## 📖 Documentation
+Full setup guide: [`Change Order Email Setup Guide.pdf`](Change%20Order%20Email%20Setup%20Guide.pdf).
 
-<hr />
+## 📜 Licence & Support
+**Copyright © 2026 BluePrint3D Ltd. All rights reserved.**
 
-<h2>📜 License</h2>
-<p><strong>Copyright &copy; 2026 BluePrint3D Ltd. All rights reserved.</strong></p>
+Free to use on personal and commercial stores. Resale, redistribution or sublicensing of this source code, modified or unmodified, for direct financial gain is prohibited. Full terms in [`LICENSE.txt`](LICENSE.txt).
 
-<p>This software is provided free of charge for personal or commercial use. However, the resale, redistribution, or sublicensing of this source code, modified or unmodified, for direct financial gain is strictly prohibited.</p>
-
-<p>Please see the <code>LICENSE.txt</code> file for full terms and conditions.</p>
-
-<p>
-    <strong>Owned by:</strong> BluePrint3D Ltd (Company Registration Number: 13473806)<br />
-    <strong>Email:</strong> <a href="mailto:support@blueprint3d.dev">support@blueprint3d.dev</a>
-</p>
+- **Website:** [blueprint3d.dev](https://www.blueprint3d.dev/modules/change-order-email)
+- **Support:** [support@blueprint3d.dev](mailto:support@blueprint3d.dev)
+- **Company:** BluePrint3D Ltd, Company No. 13473806
